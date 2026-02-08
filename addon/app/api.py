@@ -25,7 +25,15 @@ def get_config():
 @app.post("/api/mapping/{device_id}")
 def set_mapping(device_id: str, mapping: dict):
     config_store.update_mapping(device_id, mapping)
-    return {"status": "ok"}
+
+    # sofort anwenden, wenn Daten vorhanden
+    if device_id in registry.last_messages:
+        registry.process(
+            registry.devices[device_id],
+            registry.last_messages[device_id]
+        )
+
+    return {"status": "applied"}
 
 def start_api():
     uvicorn.run(app, host="0.0.0.0", port=8099)
