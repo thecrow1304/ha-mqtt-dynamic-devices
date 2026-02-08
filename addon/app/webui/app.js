@@ -1,17 +1,20 @@
-async function loadDevices() {
-  const res = await fetch("/api/devices");
-  const devices = await res.json();
-  const select = document.getElementById("deviceSelect");
+async function loadDeviceDetails(deviceId) {
+  const res = await fetch(`/api/device/${deviceId}`);
+  const dev = await res.json();
 
-  Object.entries(devices).forEach(([id, dev]) => {
-    const opt = document.createElement("option");
-    opt.value = id;
-    opt.text = dev.alias || id;
-    select.appendChild(opt);
-  });
-
-  select.onchange = () => loadFields(select.value);
+  document.getElementById("deviceDetails").innerHTML = `
+    <h3>Gerätedetails</h3>
+    <p><b>Name:</b> ${dev.alias}</p>
+    <p><b>Typ:</b> ${dev.type}</p>
+    <p><b>Adresse:</b> ${dev.address}</p>
+    <p><b>GPS:</b> ${dev.gpsLatitude}, ${dev.gpsLongitude}</p>
+  `;
 }
+
+ select.onchange = () => {
+  loadFields(select.value);
+  loadDeviceDetails(select.value);
+};
 
 async function loadFields(deviceId) {
   const res = await fetch(`/api/fields/${deviceId}`);
