@@ -1,20 +1,26 @@
 from translate_de import translate
 
-def map_entity(device_id, raw_key, value):
+def map_entity(device_id, raw_key, value, mapping):
+    entity_id = mapping["entity_id"]
+    platform = mapping["platform"]
+
+    entity = {
+        "device_id": device_id,
+        "entity_id": entity_id,
+        "platform": platform,
+        "name": mapping["name"],
+        "unit": mapping.get("unit"),
+        "device_class": mapping.get("device_class"),
+        "state_class": mapping.get("state_class"),
+    }
+
     if "valueBoolean" in value:
-        return {
-            "type": "binary_sensor",
-            "unique_id": f"{device_id}_{raw_key}",
-            "name": translate(raw_key),
-            "state": value["valueBoolean"]
-        }
+        entity["state"] = value["valueBoolean"]
 
     if "valueNumber" in value:
-        return {
-            "type": "sensor",
-            "unique_id": f"{device_id}_{raw_key}",
-            "name": translate(raw_key),
-            "state": value["valueNumber"]
-        }
+        entity["state"] = value["valueNumber"]
 
-    return None
+    if "valueString" in value:
+        entity["state"] = value["valueString"]
+
+    return entity
