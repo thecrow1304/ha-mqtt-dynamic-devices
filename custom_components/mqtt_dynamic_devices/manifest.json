@@ -1,0 +1,8 @@
+{
+  "domain": "mqtt_dynamic_devices",
+  "name": "MQTT Dynamic Devices",
+  "version": "0.1.0",
+  "requirements": [],
+  "dependencies": [],
+  "codeowners": ["@you"]
+}
