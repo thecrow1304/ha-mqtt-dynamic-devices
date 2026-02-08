@@ -1,0 +1,14 @@
+name: MQTT Dynamic Devices
+slug: mqtt_dynamic_devices
+version: "0.1.0"
+description: Dynamische Geräte & Entitäten aus MQTT
+startup: services
+boot: auto
+ingress: true
+panel_icon: mdi:devices
+services:
+  - mqtt:need
+options:
+  mqtt_topic: "physec/+/+/+/+/+/+"
+schema:
+  mqtt_topic: str
