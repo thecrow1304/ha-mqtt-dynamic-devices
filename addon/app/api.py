@@ -18,9 +18,9 @@ def devices():
 def fields(device_id: str):
     return registry.last_messages.get(device_id, {})
 
-@app.get("/api/config")
-def get_config():
-    return config_store.get()
+@app.get("/api/device/{device_id}")
+def device_detail(device_id: str):
+    return registry.devices.get(device_id)
 
 @app.post("/api/mapping/{device_id}")
 def set_mapping(device_id: str, mapping: dict):
