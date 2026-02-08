@@ -25,4 +25,21 @@ class ConfigStore:
         self.data["mappings"][device_id] = mapping
         self.save()
 
+    def is_enabled(self, device_id, field):
+        return (
+            self.data
+            .get("mappings", {})
+            .get(device_id, {})
+            .get(field, {})
+            .get("enabled", False)
+        )
+
+    def get_mapping(self, device_id, field):
+        return (
+            self.data
+            .get("mappings", {})
+            .get(device_id, {})
+            .get(field)
+        )
+
 config_store = ConfigStore()
