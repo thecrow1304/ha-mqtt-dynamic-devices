@@ -1,0 +1,9 @@
+body {
+  font-family: sans-serif;
+  padding: 1em;
+}
+
+label {
+  display: block;
+  margin: 4px 0;
+}
