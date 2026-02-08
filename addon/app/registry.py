@@ -25,3 +25,22 @@ class Registry:
         print("Entity Update:", entity)
 
 registry = Registry()
+
+from config_store import config_store
+
+class Registry:
+    def __init__(self):
+        self.devices = {}
+        self.last_messages = {}
+
+    def process(self, sensor, message):
+        device_id = sensor.get("deviceId")
+        if not device_id:
+            return
+
+        self.devices[device_id] = sensor
+        self.last_messages[device_id] = message
+
+        # hier später: nur gemappte Felder weiterreichen
+
+registry = Registry()
