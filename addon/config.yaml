@@ -1,6 +1,6 @@
 name: MQTT Dynamic Devices
 slug: mqtt_dynamic_devices
-version: "0.1.0"
+version: "0.0.1"
 description: Dynamische Geräte & Entitäten aus MQTT
 startup: services
 boot: auto
